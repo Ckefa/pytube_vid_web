@@ -39,13 +39,18 @@ for i in videos_data["links"]:
 		url = f"https://www.youtube.com/watch?v={url}"
 		yt = YouTube(url)
 		tittle = yt.title
-		videos_data["title"].append(title)
+		videos_data["title"].append(tittle)
 		thumb = yt.thumbnail_url
 		videos_data["thumbnail"].append(thumb)
-		print(yt.title)
 	except:
 		videos_data['links'].remove(i)
 		print('video unavailabe!!', url)
+
+
+for i in videos_data:
+	print(len(i))
+
+
 
 
 

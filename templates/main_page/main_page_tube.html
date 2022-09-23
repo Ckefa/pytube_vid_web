@@ -1,0 +1,144 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" contennbt="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Material Icons -->
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- CSS File -->
+    <link rel="stylesheet" href="{% static 'main_page/main_page_tube.css' %}" />
+    <title>PyTube</title>
+  </head>
+  <body>
+    <!-- Header Starts -->
+    <div id="navbar" class="header">
+      <div class="header__left">
+        <i id="menu" class="material-icons">menu</i>
+
+        <!-- Sidebar Starts -->
+        <div class="sidebar">
+          <div class="sidebar__categories">
+            <div class="sidebar__category">
+              <i class="material-icons">home</i>
+              <span>Home</span>
+            </div>
+            <div class="sidebar__category">
+              <i class="material-icons">local_fire_department</i>
+              <span>Trending</span>
+            </div>
+            <div class="sidebar__category">
+              <i class="material-icons">subscriptions</i>
+              <span>Subcriptions</span>
+            </div>
+          </div>
+          <hr />
+          <div class="sidebar__categories">
+            <div class="sidebar__category">
+              <i class="material-icons">library_add_check</i>
+              <span>Library</span>
+            </div>
+            <div class="sidebar__category">
+              <i class="material-icons">history</i>
+              <span>History</span>
+            </div>
+            <div class="sidebar__category">
+              <i class="material-icons">play_arrow</i>
+              <span>Your Videos</span>
+            </div>
+            <div class="sidebar__category">
+              <i class="material-icons">watch_later</i>
+              <span>Watch Later</span>
+            </div>
+            <div class="sidebar__category">
+              <i class="material-icons">thumb_up</i>
+              <span>Liked Videos</span>
+            </div>
+          </div>
+          <hr />
+        </div>
+        <!-- Sidebar Ends -->
+
+        <img id="logo" src="{% static 'store/logo.png' %}" alt="" />
+        <h1 class="tittle">PyTube</h1>
+      </div>
+
+      <div class="header__icons">
+        <i id="sbar" class="material-icons display-this"
+          >search
+          <div class="header__search">
+            <form action="">
+              <input type="text" placeholder="Search" />
+              <button><i class="material-icons">search</i></button>
+            </form>
+          </div>
+        </i>
+        <i class="material-icons">videocam</i>
+        <i class="material-icons">apps</i>
+        <i class="material-icons">notifications</i>
+        <div class="acc_act">
+          <i class="material-icons display-this">account_circle</i>
+          <div class="acc_cont">
+            {% if user.is_authenticated %}
+            <span style="font-size: 14px">user: {{user.username}}</span>
+            <br />
+            <span><a href="/logout">logout</a></span>
+            <br />
+            {% else %}
+            <span><a href="/login">Login</a></span>
+            <br />
+            <span><a href="/signup">Sign Up</a></span>
+            <br />
+            {% endif %}
+            <span>About</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header Ends -->
+
+    <!-- Main Body Starts -->
+    <div class="mainBody">
+      <!-- Videos Section -->
+      <div class="videos">
+        <h1></h1>
+
+        <div class="videos__container">
+          {% for ix in indx %}
+          <!-- Single Video starts -->
+          <div onclick="crind({{ix}});" class="video">
+            <form id="f1" method="POST" action="{% url 'vidplay' %}">
+              {% csrf_token %}
+              <input style="display: none" value="{{ix}}" id="ind" name="ind" />
+              <div class="video__thumbnail">
+                <img src="{{thumbnail|index:ix}}" />
+              </div>
+              <div class="video__details">
+                <div class="author">
+                  <img
+                    width="100%"
+                    src="{% static 'store/logo.png' %}"
+                    alt=""
+                  />
+                </div>
+                <div class="title">
+                  <h3>{{title|index:ix}}</h3>
+                  <a href="">FutureCoders • 10M Views • 3 Months Ago</a>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- Single Video Ends -->
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'main_page/main_page_tube.js' %}"></script>
+    <!-- Main Body Ends -->
+  </body>
+</html>

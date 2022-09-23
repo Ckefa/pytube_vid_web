@@ -1,4 +1,3 @@
-from calendar import c
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -14,7 +13,7 @@ context = lnks.videos_data
 def main_page_view(request):
 
     context["indx"] = [i for i in range(len(context["links"]))]
-    return render(request, "main_page/main_page_tube.html", context)
+    return render(request, "main_page/main_page_tube.html")
 
 
 def index(request):

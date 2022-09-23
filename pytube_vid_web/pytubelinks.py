@@ -1,5 +1,4 @@
-import requests
-import re
+import requests,re
 from bs4 import BeautifulSoup as bs
 from pytube import YouTube 
 
@@ -15,10 +14,7 @@ soup = bs(r, 'lxml')
 cont = soup.find_all("script")
 
 ind = [len(str(v)) for i,v in enumerate(cont)]
-#print(len(ind))
-
 cont = cont[ind.index(max(ind))]
-
 jsn_text = re.search("var ytInitialData = (.+)[,;](1)",str(cont)).group(1)
 
 cont = jsn_text
@@ -30,22 +26,9 @@ for ind, ch in enumerate(cont):
 			klkl = f"https://youtube.com/embed/{str(posl)}?modestbranding=1&&autoplay=1"
 			if klkl not in videos_data["links"]:
 				videos_data["links"].append(klkl)
-
-
+			
 for i in videos_data["links"]:
-	try:
-		url = i.replace("?modestbranding=1&&autoplay=1", '')
-		url = url.replace("https://youtube.com/embed/", '')
-		url = f"https://www.youtube.com/watch?v={url}"
-		yt = YouTube(url)
-		tittle = yt.title
-		videos_data["title"].append(title)
-		thumb = yt.thumbnail_url
-		videos_data["thumbnail"].append(thumb)
-		print(yt.title)
-	except:
-		videos_data['links'].remove(i)
-		print('video unavailabe!!', url)
-
-
-
+	yt = YouTube(i)
+	videos_data["title"].append(yt.title)
+	videos_data["thumbnail"].append(yt.thumbnail_url)
+	

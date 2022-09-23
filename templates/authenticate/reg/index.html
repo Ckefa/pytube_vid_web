@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PyTube Sign Up</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'authenticate/reg/fonts/material-icon/css/material-design-iconic-font.min.css' %}" type="text/css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'authenticate/reg/css/style.css' %}" type="text/css">
+  </head>
+  <body>
+
+  <div class="main">
+
+	<section class="signup">
+	  <!-- <img src="images/signup-bg.jpg" alt=""> -->
+	  <div class="container">
+		<div class="signup-content">
+		  <form method="POST" id="signup-form" class="signup-form">
+			{% csrf_token %}
+			<h2 class="form-title">Create account</h2>
+			<center>
+			  <img style="margin-top:-40px; padding-bottom:25px;" src="{% static 'store/logo.png' %}" width="90px" height="80px"></img>
+			</center>
+			<div class="form-group">
+			  <input type="text" class="form-input" name="username" id="username" placeholder="Your Name"/>
+			</div>
+			<div class="form-group">
+			  <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+			</div>
+			<div class="form-group">
+			  <input type="text" class="form-input" name="pass1" id="pass1" placeholder="Password"/>
+			  <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+			</div>
+			<div class="form-group">
+			  <input type="password" class="form-input" name="pass2" id="pass2" placeholder="Repeat your password"/>
+			</div>
+			<div class="form-group">
+			  <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
+			  <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+			</div>
+			<div class="form-group">
+			  <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+			</div>
+		  </form>
+		  <p class="loginhere">
+			Have already an account ? <a href="/login" class="loginhere-link">Login here</a>
+		  </p>
+		</div>
+	  </div>
+	</section>
+
+  </div>
+
+  <!-- JS -->
+  <script src="{% static 'authenticate/reg/vendor/jquery/jquery.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'authenticate/reg/js/main.js' %}" type="text/javascript"></script>
+</html>

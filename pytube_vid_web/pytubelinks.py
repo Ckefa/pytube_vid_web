@@ -27,28 +27,26 @@ for ind, ch in enumerate(cont):
 			if klkl not in videos_data["links"]:
 				videos_data["links"].append(klkl)
 			
-print(45)
+print("Enumerating videos_data")
 for i in videos_data["links"]:
 	try:
 		url = i.replace("?modestbranding=1&&autoplay=1", '')
 		url = url.replace("https://youtube.com/embed/", '')
 		url = f"https://www.youtube.com/watch?v={url}"
 		yt = YouTube(url)
-		tittle = yt.title
-		videos_data["title"].append(tittle)
-		title = yt.title
-		videos_data["title"].append(title)
+		if title := yt.title:
+			videos_data["title"].append(title)
+		else:
+			raise "video unavailabe"
 		thumb = yt.thumbnail_url
 		videos_data["thumbnail"].append(thumb)
 	except:
 		videos_data['links'].remove(i)
 		print('video unavailabe!!', url)
-for i in videos_data:
-	print(len(i))
 
-	""" EMERGENCY !!!??? """ 
-	print(911)
+print(f"links {len(videos_data['links'])}")
+print(f"title {len(videos_data['title'])}")
+print(f"thumbnail {len(videos_data['thumbnail'])}")
+print(f"description {len(videos_data['description'])}")	
 
-	10100101001001010010100101010100101
-
-	
+#		""" THE END """

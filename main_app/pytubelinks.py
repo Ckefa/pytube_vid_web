@@ -31,15 +31,15 @@ for ind, ch in enumerate(cont):
 			if klkl not in videos_data["links"]:
 				videos_data["links"].append(klkl)
 
-
+print(45)
 for i in videos_data["links"]:
 	try:
 		url = i.replace("?modestbranding=1&&autoplay=1", '')
 		url = url.replace("https://youtube.com/embed/", '')
 		url = f"https://www.youtube.com/watch?v={url}"
 		yt = YouTube(url)
-		tittle = yt.title
-		videos_data["title"].append(tittle)
+		title = yt.title
+		videos_data["title"].append(title)
 		thumb = yt.thumbnail_url
 		videos_data["thumbnail"].append(thumb)
 	except:
@@ -49,8 +49,6 @@ for i in videos_data["links"]:
 
 for i in videos_data:
 	print(len(i))
-
-
 
 
 

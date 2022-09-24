@@ -27,8 +27,22 @@ for ind, ch in enumerate(cont):
 			if klkl not in videos_data["links"]:
 				videos_data["links"].append(klkl)
 			
+print(45)
 for i in videos_data["links"]:
-	yt = YouTube(i)
-	videos_data["title"].append(yt.title)
-	videos_data["thumbnail"].append(yt.thumbnail_url)
+	try:
+		url = i.replace("?modestbranding=1&&autoplay=1", '')
+		url = url.replace("https://youtube.com/embed/", '')
+		url = f"https://www.youtube.com/watch?v={url}"
+		yt = YouTube(url)
+		tittle = yt.title
+		videos_data["title"].append(tittle)
+		title = yt.title
+		videos_data["title"].append(title)
+		thumb = yt.thumbnail_url
+		videos_data["thumbnail"].append(thumb)
+	except:
+		videos_data['links'].remove(i)
+		print('video unavailabe!!', url)
+for i in videos_data:
+	print(len(i))
 	

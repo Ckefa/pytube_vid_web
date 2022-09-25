@@ -9,7 +9,6 @@ from django import template
 
 context = lnks.videos_data
 
-
 def main_page_view(request):
 
     context["indx"] = [i for i in range(len(context["links"]))]

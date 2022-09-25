@@ -4,14 +4,19 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 import smtplib
 from email.message import EmailMessage
-from . import pytubelinks as lnks
 from django import template
 
-context = lnks.videos_data
+context = {}
+
+def refresh():
+    from . import pytubelinks as lnks
+    global context
+    context = lnks.videos_data
+
 
 def main_page_view(request):
-
-    context["indx"] = [i for i in range(len(context["links"]))]
+    refresh()
+    context["indx"] = [i for i in range(len(context["title"]))]
     return render(request, "main_page/main_page_tube.html", context)
 
 

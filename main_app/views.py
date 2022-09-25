@@ -5,14 +5,14 @@ from django.contrib.auth import authenticate, login, logout
 import smtplib
 from email.message import EmailMessage
 from django import template
-from . import pytubelinkss as lnks
+from . import pytubelinks as lnks
 
 
 context = {}
 
 def refresh():
-    
     global context
+    lnks.generate_data()
     context = lnks.videos_data
 
 

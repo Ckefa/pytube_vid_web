@@ -125,7 +125,7 @@ body {
 .tittle {
   color: #ff0000;
   font-size: 220%;
-  margin-top: 5%;
+  margin-top: 0%;
 }
 
 .sidebar {
@@ -227,11 +227,11 @@ hr {
 
 .video__details {
   display: flex;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .title {
-  display: flex;
+  display: ;
   flex-direction: column;
 }
 
@@ -239,7 +239,7 @@ hr {
   color: #ffff;
   line-height: 18px;
   font-size: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 0px;
 }
 .disc {
   margin-start: 4%;
@@ -253,7 +253,7 @@ hr {
 
 h1 {
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   color: rgb(3, 3, 3);
 }
 
@@ -309,7 +309,7 @@ h1 {
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
   }
 }
 

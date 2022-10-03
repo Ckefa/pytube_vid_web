@@ -2,7 +2,8 @@ import requests
 import re
 from bs4 import BeautifulSoup as bs
 from pytube import YouTube 
-from multiprocessing import Pool
+from threading import Thread
+from concurrent.futures import ThreadPoolExecutor
 
 
 videos_data = {
@@ -65,20 +66,19 @@ def generate_data():
 	#print("Enumerating videos_data")
 
 	if __name__ == '__main__':
-		i = 0
-		while i < len(videos_data['links']):
-			p = Pool(processes=8)
-			pack = [videos_data['links'][j] for j in range(8)]
-			res = p.map(mult_proc, pack)
-			p.close() 
+		j = 0
+		while j < len(videos_data['links']):
+			with ThreadPoolExecutor(max_workers = 8) as tpe:
+				pack = [videos_data['links'][j] for j in range(8)]
+				res = tpe.map(mult_proc, pack)
+				 
 
-			print(333)
 			for i in res:
 				videos_data['title'].append(i['title'])
-				videos_data['thumbnail'].append(i['thumb'])
-			i += 8
-			break
-			exit()
+				videos_data['thumbnail'].append(i['thumbnail'])
+			j += 8
+			print(len(videos_data['title']))
+			
 			
 	
 	"""print(f"links {len(videos_data['links'])}")

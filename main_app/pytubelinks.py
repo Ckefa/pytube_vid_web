@@ -2,14 +2,36 @@ import requests
 import re
 from bs4 import BeautifulSoup as bs
 from pytube import YouTube 
+from multiprocessing import Pool
 
 
 videos_data = {
-	"links": [],
-	"title": [],
-	"description": [],
-	"thumbnail": [],
+	"links": "",
+	"title": "",
+	"description": "",
+	"thumbnail": "",
 }
+
+def mult_proc(i):
+	sub_vid = {
+	'title': [],
+	'thumbnail' : []
+	}
+	try:
+			url = i.replace("?modestbranding=1&&autoplay=1", '')
+			url = url.replace("https://youtube.com/embed/", '')
+			url = f"https://www.youtube.com/watch?v={url}"
+			yt = YouTube(url)
+			if title := yt.title:
+				sub_vid['title'] = title
+			else:
+				raise "video unavailabe"
+			thumb = yt.thumbnail_url
+			sub_vid['thumbnail'] = (thumb)
+	except:
+			sub_vid['links'].remove(i) if i in videos_data['links'] else 1
+			print('video unavailabe!!', url)
+	return sub_vid
 
 def generate_data():
 	videos_data['links'] = []
@@ -38,28 +60,32 @@ def generate_data():
 				if klkl not in videos_data["links"]:
 					videos_data["links"].append(klkl)
 
+	
 
-	print("Enumerating videos_data")
-	for i in videos_data["links"]:
-		try:
-			url = i.replace("?modestbranding=1&&autoplay=1", '')
-			url = url.replace("https://youtube.com/embed/", '')
-			url = f"https://www.youtube.com/watch?v={url}"
-			yt = YouTube(url)
-			if title := yt.title:
-				videos_data["title"].append(title)
-			else:
-				raise "video unavailabe"
-			thumb = yt.thumbnail_url
-			videos_data["thumbnail"].append(thumb)
-		except:
-			videos_data['links'].remove(i)
-			print('video unavailabe!!', url)
+	#print("Enumerating videos_data")
 
-	print(f"links {len(videos_data['links'])}")
+	if __name__ == '__main__':
+		i = 0
+		while i < len(videos_data['links']):
+			p = Pool(processes=8)
+			pack = [videos_data['links'][j] for j in range(8)]
+			res = p.map(mult_proc, pack)
+			p.close() 
+
+			print(333)
+			for i in res:
+				videos_data['title'].append(i['title'])
+				videos_data['thumbnail'].append(i['thumb'])
+			i += 8
+			break
+			exit()
+			
+	
+	"""print(f"links {len(videos_data['links'])}")
 	print(f"title {len(videos_data['title'])}")
 	print(f"thumbnail {len(videos_data['thumbnail'])}")
-	print(f"description {len(videos_data['description'])}")	
+	print(f"description {len(videos_data['description'])}")"""
 
 	#	ok	""" THE END """
 
+generate_data()

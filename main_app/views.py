@@ -5,12 +5,11 @@ from django.contrib.auth import authenticate, login, logout
 import smtplib
 from email.message import EmailMessage
 from django import template
-from . import pytubelinks as lnks
-
 
 context = {}
 
 def refresh():
+    from . import pytubelinks as lnks
     global context
     lnks.generate_data()
     context = lnks.videos_data
@@ -28,7 +27,6 @@ def index(request):
 
 def signup(request):
     if request.method == "POST":
-
         u_name = request.POST['username']
         email = request.POST['email']
         pass1 = request.POST['pass1']
@@ -61,7 +59,7 @@ def signup(request):
     return render(request, "authenticate/reg/index.html")
 
 
-def signin(request):
+def signin(request): 
     if request.method == "POST":
         eml = request.POST["email"]
         pwd = request.POST["pass1"]
@@ -79,7 +77,7 @@ def signin(request):
 
     return render(request, "authenticate/login/index.html")
 
-
+    
 def signout(request):
     logout(request)
     messages.success(request, " Logout successfull")

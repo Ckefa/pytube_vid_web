@@ -36,7 +36,7 @@ def generate_data():
 	videos_data['description'] = []
 	videos_data['thumbnail'] = []
 
-	r = requests.get("https://www.youtube.com").text
+	r = requests.get("https://www.youtube.com", stream=True).text
 	soup = bs(r, 'lxml')
 	cont = soup.find_all("script")
 
@@ -58,25 +58,20 @@ def generate_data():
 					videos_data["links"].append(klkl)
 
 	
-
 	print("Enumerating videos_data")
 
-	if __name__ == '__main__':
-		j = 0
-		L = len(videos_data['links'])
-		with ThreadPoolExecutor() as tpe: 
-			pack = [videos_data['links'][k] for k in range(L)]
-			futures = [tpe.submit(mult_proc, i) for i in pack]
+	j = 0
+	L = len(videos_data['links'])
+	with ThreadPoolExecutor() as tpe: 
+		pack = [videos_data['links'][k] for k in range(L)]
+		futures = [tpe.submit(mult_proc, i) for i in pack]
 
-			if all(as_completed(futures)):
-				print("Done")
-
-			print(len(videos_data['title']))
-		
+		if all(as_completed(futures)):
+			print("Done")
+	
 	
 generate_data()
-for i in videos_data["title"]:
-	print(i)
+print(len(videos_data['title']))
 
 
 

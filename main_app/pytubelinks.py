@@ -3,7 +3,7 @@ import re
 from bs4 import BeautifulSoup as bs
 from pytube import YouTube 
 from threading import Thread
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 videos_data = {
@@ -14,25 +14,21 @@ videos_data = {
 }
 
 def mult_proc(i):
-	sub_vid = {
-	'title': [],
-	'thumbnail' : []
-	}
 	try:
-			url = i.replace("?modestbranding=1&&autoplay=1", '')
-			url = url.replace("https://youtube.com/embed/", '')
-			url = f"https://www.youtube.com/watch?v={url}"
-			yt = YouTube(url)
-			if title := yt.title:
-				sub_vid['title'] = title
-			else:
-				raise "video unavailabe"
-			thumb = yt.thumbnail_url
-			sub_vid['thumbnail'] = (thumb)
+		url = i.replace("?modestbranding=1&&autoplay=1", '')
+		url = url.replace("https://youtube.com/embed/", '')
+		url = f"https://www.youtube.com/watch?v={url}"
+		yt = YouTube(url)			
+		if title := yt.title:
+			videos_data['title'].append(title)
+		else:
+			raise "video unavailabe"
+		thumb = yt.thumbnail_url
+		videos_data['thumbnail'].append(thumb)
 	except:
-			sub_vid['links'].remove(i) if i in videos_data['links'] else 1
-			print('video unavailabe!!', url)
-	return sub_vid
+		if i in videos_data['links']:
+			videos_data['links'].remove(i) 
+		print('video unavailabe!!', url)
 
 def generate_data():
 	videos_data['links'] = []
@@ -63,29 +59,25 @@ def generate_data():
 
 	
 
-	#print("Enumerating videos_data")
+	print("Enumerating videos_data")
 
 	if __name__ == '__main__':
 		j = 0
-		while j < len(videos_data['links']):
-			with ThreadPoolExecutor(max_workers = 8) as tpe:
-				pack = [videos_data['links'][j] for j in range(8)]
-				res = tpe.map(mult_proc, pack)
-				 
+		L = len(videos_data['links'])
+		with ThreadPoolExecutor() as tpe: 
+			pack = [videos_data['links'][k] for k in range(L)]
+			futures = [tpe.submit(mult_proc, i) for i in pack]
 
-			for i in res:
-				videos_data['title'].append(i['title'])
-				videos_data['thumbnail'].append(i['thumbnail'])
-			j += 8
+			for _ in as_completed(futures):
+				_
+
 			print(len(videos_data['title']))
-			
-			
+		
 	
-	"""print(f"links {len(videos_data['links'])}")
-	print(f"title {len(videos_data['title'])}")
-	print(f"thumbnail {len(videos_data['thumbnail'])}")
-	print(f"description {len(videos_data['description'])}")"""
-
-	#	ok	""" THE END """
-
 generate_data()
+for i in videos_data["title"]:
+	print(i)
+
+
+#	ok	""" THE END """
+

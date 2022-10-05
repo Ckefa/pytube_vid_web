@@ -68,8 +68,8 @@ def generate_data():
 			pack = [videos_data['links'][k] for k in range(L)]
 			futures = [tpe.submit(mult_proc, i) for i in pack]
 
-			for _ in as_completed(futures):
-				_
+			if all(as_completed(futures)):
+				print("Done")
 
 			print(len(videos_data['title']))
 		
@@ -77,6 +77,7 @@ def generate_data():
 generate_data()
 for i in videos_data["title"]:
 	print(i)
+
 
 
 #	ok	""" THE END """

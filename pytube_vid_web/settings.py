@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 import django_heroku
 import dj_database_url
 
@@ -120,9 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/templates/'
 
-STATICFILES_DIRS = [
-BASE_DIR / "templates",
-]
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "templates"),)
 
 django_heroku.settings(locals())
 

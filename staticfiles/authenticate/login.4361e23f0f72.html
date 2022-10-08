@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{% static 'authenticate/styles/index.css' %}">
+  </head>
+  <body>
+
+	{% if messages %}
+	{% for message in messages %}
+
+<script>
+alert("{{ message }}");
+</script>
+
+	{% endfor %}
+	{% endif %}
+	<div id="ops">
+	  <center>
+		<h1>Log in</h1>
+
+		<form method="POST">
+		  {% csrf_token %}
+
+		  <div id="aaa">
+			<label for="">Email</label>
+			<br>
+			<input type="text" id="email" name="email" placeholder="email" Required>
+			<br>
+		  </div>
+
+		  <div id="aaa">
+			<label for="">Password</label>
+			<br>
+			<input type="password" id="pass1" name="pass1" placeholder="password" Required>
+			<br>
+			<button id="lin" type="submit">login</button>
+		  </div>
+
+		</form>
+	  </center>
+	</div>
+
+
+	<script ></script>
+  </body>
+</html>

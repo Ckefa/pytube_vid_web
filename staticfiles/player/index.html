@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>
+      Relaxing Flute Music, Sleep Music, Calm Music, Insomnia, Study ☯1949
+    </title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'player/style.css' %}" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- <div> -->
+    <div class="container">
+      <!-- Current Video  -->
+      <div class="video-info">
+        <iframe
+          width="799px"
+          height="444"
+          src="{{h}}"
+          allow="accelerometer; autoplay; enrycpted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+
+        <div style="font-size: 40px" class="video-title">{{txt}}</div>
+      </div>
+    </div>
+  </body>
+
+  <script></script>
+</html>

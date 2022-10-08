@@ -68,12 +68,9 @@ def generate_data():
 
 		if all(as_completed(futures)):
 			print("Done")
+	print(len(videos_data['title']))
 	
 	
-generate_data()
-print(len(videos_data['title']))
-
-
-
+#generate_data()
 #	ok	""" THE END """
 

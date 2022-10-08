@@ -1,0 +1,58 @@
+{% load static %}
+body
+{
+  background-color:rgb(187, 192, 188);
+}
+.nav
+{
+  color:#FF1414;
+  font-size: 500%;
+  background-color:#000000;
+  overflow: auto;
+}
+.nav span
+{
+  background-image: url("{% static 'authenticate/images/home.png' %}");
+}
+#ops
+{
+  display:block;
+  width: 100%;
+  height:80vh;
+  font-size: 150%;
+  background: #1B1C3A;
+  border-radius:15px;
+  margin:0 auto;
+  color:#ffffff;
+ 
+}
+form
+{
+  background-color:#1B1C3A;
+}
+button
+{
+  padding: 2%;
+  margin-top:5%;
+  width:30%;
+  border-radius:15px;
+  font-size:130%;
+}
+#lin
+{
+  background-color:#17E741;
+}
+#lot
+{
+  background-color:#00ABFB;
+}
+
+input
+{
+  text-align:center;
+  border-radius:15px;
+}
+#aaa
+{
+  margin-top:5%;
+}

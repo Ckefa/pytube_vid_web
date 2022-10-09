@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-3n&0-+q!wn_hk$7dp_4!cc!(#gsi$27)g7h8dc-cg4v2&nh#m5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "main-app-ck.herokuapp.com"]
 
 
 # Application definition
@@ -51,8 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-]
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    ]
 
 ROOT_URLCONF = 'pytube_vid_web.urls'
 
@@ -120,7 +120,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 STATIC_URL = 'templates/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "templates"),)

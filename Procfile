@@ -1,1 +1,1 @@
-web: gunicorn pytube_vid_web.wsgi.wsgi:application --log-file -
+web: gunicorn pytube_vid_web.wsgi:application --log-file -

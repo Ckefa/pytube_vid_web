@@ -74,7 +74,6 @@ def signin(request):
         else:
             messages.error(request, "Invalid Credentials.")
             return redirect("login")
-
     return render(request, "authenticate/login/index.html")
 
     
@@ -83,13 +82,17 @@ def signout(request):
     messages.success(request, " Logout successfull")
     return redirect("main_page_view")
 
-
 def vidplay(request):
     if request.method == "POST":
         indvid = request.POST['ind']
+        print(f"debug flag {indvid}")
         txt = str(context["title"][int(indvid)])
         indvid = str(context["links"][int(indvid)])
 
         mplayer = {"h": indvid, "txt": txt}
         return render(request, "player/index.html", mplayer)
     return render(request, "player/index.html")
+
+
+
+

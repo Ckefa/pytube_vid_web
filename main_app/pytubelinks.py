@@ -14,21 +14,24 @@ videos_data = {
 }
 
 def mult_proc(i):
+	val = ["", ""]
 	try:
 		url = i.replace("?modestbranding=1&&autoplay=1", '')
 		url = url.replace("https://youtube.com/embed/", '')
 		url = f"https://www.youtube.com/watch?v={url}"
 		yt = YouTube(url)			
 		if title := yt.title:
-			videos_data['title'].append(title)
+			val[0] = title
 		else:
 			raise "video unavailabe"
 		thumb = yt.thumbnail_url
-		videos_data['thumbnail'].append(thumb)
+		val[1] = thumb
 	except:
 		if i in videos_data['links']:
 			videos_data['links'].remove(i) 
 		print('video unavailabe!!', url)
+		return [None, None]
+	return val
 
 def generate_data():
 	videos_data['links'] = []
@@ -64,11 +67,16 @@ def generate_data():
 	L = len(videos_data['links'])
 	with ThreadPoolExecutor() as tpe: 
 		pack = [videos_data['links'][k] for k in range(L)]
-		futures = [tpe.submit(mult_proc, i) for i in pack]
+		futures = tpe.map(mult_proc, pack)
 
-		if all(as_completed(futures)):
-			print("Done")
-	print(len(videos_data['title']))
+		for i in futures:
+			if i[0]:
+				videos_data['title'].append(i[0])
+			if i[1]:
+				videos_data["thumbnail"].append(i[1])
+
+	print("Done!!!")
+	print(len(videos_data['title']), "videos rendered")
 	
 	
 #generate_data()

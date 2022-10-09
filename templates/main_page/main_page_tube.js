@@ -23,8 +23,8 @@ scrl.addEventListener("scroll", function () {
   prevScrollpos = currentScrollPos;
 });
 
-function crind(vivind) {
-
+function crind(vivind) 
+{
   document.querySelector("#ind").value = vivind;
   document.querySelector("#f1").submit();
 }

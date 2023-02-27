@@ -19,9 +19,10 @@ def mult_proc(i):
 		url = i.replace("?modestbranding=1&&autoplay=1", '')
 		url = url.replace("https://youtube.com/embed/", '')
 		url = f"https://www.youtube.com/watch?v={url}"
-		yt = YouTube(url)			
-		if title := yt.title:
-			val[0] = title
+		yt = YouTube(url)
+                #pass
+		if yt.title:
+			val[0] = yt.title
 		else:
 			raise "video unavailabe"
 		thumb = yt.thumbnail_url

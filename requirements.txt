@@ -15,7 +15,6 @@ matplotlib
 numpy
 packaging
 Pillow
-psycopg2
 pyparsing
 python-dateutil
 pytube

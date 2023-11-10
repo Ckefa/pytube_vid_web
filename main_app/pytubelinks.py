@@ -53,7 +53,7 @@ async def fetch_data(url="https://www.youtube.com"):
     else:
         print("No video links found.")
 
-def generate():
+def generate_data():
     asyncio.run(fetch_data())
     return videos_data
   

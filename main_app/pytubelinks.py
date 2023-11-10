@@ -49,10 +49,15 @@ async def fetch_data(url="https://www.youtube.com"):
                 videos_data['links'].append(res.get('link'))
                 videos_data["title"].append(res.get('title'))
                 videos_data['thumbnail'].append(res.get('thumb'))
-            
 
     else:
         print("No video links found.")
+
+def generate():
+    asyncio.run(fetch_data())
+    return videos_data
+  
+
 
 if __name__ == "__main__":
     a = time()
